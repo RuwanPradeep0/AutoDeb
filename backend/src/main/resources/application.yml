@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/autodeb  # Use the service name 'db' as the hostname if using Docker Compose
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # Automatically creates/updates tables based on entity classes
+    show-sql: true       # Display SQL queries in the console (optional)
+    properties:
+      hibernate:
+        format_sql: true  # Pretty-prints SQL in the console (optional)
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+
+  # Optional: Additional configurations
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false  # Optional: Better date/time formatting
+
+server:
+  port: 8080  # The port your Spring Boot app will run on
