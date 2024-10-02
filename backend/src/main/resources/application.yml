@@ -1,5 +1,12 @@
 spring:
+  security:
+    user:
+      name: admin   # Custom username
+      password: admin123  # Custom password
   datasource:
+    hikari:
+      connection-timeout: 20000  # Retry for 20 seconds if DB is not available
+
     url: jdbc:postgresql://db:5432/autodeb  # Use the service name 'db' as the hostname if using Docker Compose
     username: postgres
     password: postgres

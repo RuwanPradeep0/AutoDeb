@@ -1,0 +1,17 @@
+GET http://localhost:8080/Demo
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.1.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=6068C79FC2CD8E752C8BE4A5F1B348D8
+content-length: 0
+
+###
+
+GET http://localhost:8080/Demo
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.1.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+###
+

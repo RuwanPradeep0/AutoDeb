@@ -1,3 +1,4 @@
+version: '3.8'
 
 services:
   backend:
@@ -11,20 +12,9 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
-      - db
-    entrypoint: [ "./wait-for-it.sh", "db:5432", "--", "./mvnw", "spring-boot:run" ]
-
-
-  frontend:
-    build: ./frontend
-    container_name: react-native-app
-    ports:
-      - "19000:19000"
-      - "19001:19001"
-    environment:
-      - EXPO_WEB_HOST=0.0.0.0
-    volumes:
-      - ./frontend:/app
+      db:
+        condition: service_healthy  # Ensures db is healthy before starting backend
+    restart: always  # Restart backend if it fails due to db not being ready
 
   db:
     image: postgres:15
@@ -37,6 +27,11 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    healthcheck:  # Add a health check for PostgreSQL to ensure readiness
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4
